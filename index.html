@@ -20,6 +20,7 @@
             min-height: 100vh;
             text-align: center;
             padding: 20px;
+            transition: background 0.5s ease;
         }
         .card-container {
             background: linear-gradient(145deg, #131822, #1b2332);
@@ -29,24 +30,28 @@
             max-width: 450px;
             width: 100%;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
         }
-        .logo {
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #3b82f6;
-            margin-bottom: 20px;
+        .badge-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         h1 {
             font-size: 2rem;
             margin-bottom: 15px;
             font-weight: 700;
+            line-height: 1.3;
         }
         .visitor-name {
-            color: #ff6b8b; /* Eye-catching accent color for the username */
             font-weight: 800;
             display: inline-block;
-            border-bottom: 2px dashed #ff6b8b;
             padding-bottom: 2px;
         }
         p {
@@ -60,17 +65,55 @@
             color: #64748b;
             font-style: italic;
         }
+
+        /* --- THEME CUSTOMIZATIONS --- */
+        
+        /* Committee Style (Crimson & Gold) */
+        body.theme-committee {
+            background-color: #0f0507;
+        }
+        .theme-committee .card-container {
+            border-color: #d4af37; /* Gold Border */
+            background: linear-gradient(145deg, #1c0a0e, #2a0f14);
+        }
+        .theme-committee .badge-tag {
+            background-color: #de2c4d;
+            color: #ffffff;
+        }
+        .theme-committee .visitor-name {
+            color: #d4af37; /* Gold Name */
+            border-bottom: 2px dashed #d4af37;
+        }
+
+        /* Participant Style (Vibrant Blue & Pink) */
+        body.theme-participant {
+            background-color: #050b14;
+        }
+        .theme-participant .card-container {
+            border-color: #ff6b8b; /* Pink Border */
+            background: linear-gradient(145deg, #091220, #101f36);
+        }
+        .theme-participant .badge-tag {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+        .theme-participant .visitor-name {
+            color: #ff6b8b; /* Pink Name */
+            border-bottom: 2px dashed #ff6b8b;
+        }
     </style>
 </head>
 <body>
 
     <div class="card-container">
-        <div class="logo">RGB 2026</div>
+        <!-- Role Badge Tag -->
+        <div id="role-badge" class="badge-tag">MEMORABILIA</div>
         
-        <!-- The dynamic heading -->
+        <!-- Dynamic Heading -->
         <h1>Thanks for joining, <br><span id="name-placeholder" class="visitor-name">Player</span>!</h1>
         
-        <p>
+        <!-- Dynamic Message Body -->
+        <p id="message-placeholder">
             You made history with us at the MMU Melaka CLC Concourse. This card stands as a permanent digital token of our appreciation for being a core part of Rhythm Game Bash 2026.
         </p>
         
@@ -80,23 +123,39 @@
     </div>
 
     <script>
-        // JavaScript logic to read the URL parameter
-        function getParticipantName() {
-            // Look at the web address (e.g., website.com/?name=Zhehe218)
+        function initDynamicPage() {
             const urlParams = new URLSearchParams(window.location.search);
-            // Get the value inside 'name'
-            let name = urlParams.get('name');
             
-            // If a name exists in the link, decode it and clean up any weird spaces
-            if (name) {
-                return decodeURIComponent(name).trim();
+            // 1. Parse Name
+            let name = urlParams.get('name');
+            name = name ? decodeURIComponent(name).trim() : "Player";
+            document.getElementById('name-placeholder').textContent = name;
+            
+            // 2. Parse Role and Apply Dynamic Themes/Content
+            let role = urlParams.get('role');
+            role = role ? role.toLowerCase().trim() : "default";
+            
+            const bodyEl = document.body;
+            const badgeEl = document.getElementById('role-badge');
+            const messageEl = document.getElementById('message-placeholder');
+            
+            if (role === 'committee' || role === 'comm') {
+                // Apply Committee Styles
+                bodyEl.classList.add('theme-committee');
+                badgeEl.textContent = "🛡️ Committee Staff";
+                messageEl.textContent = `Thank you for your incredible dedication and hard work behind the scenes, ${name}! Your efforts made RGB 2026 a reality at the CLC Concourse. This token honors your contribution to the crew.`;
+            } 
+            else if (role === 'participant' || role === 'player') {
+                // Apply Participant Styles
+                bodyEl.classList.add('theme-participant');
+                badgeEl.textContent = "🎹 Tourney Competitor";
+                messageEl.textContent = `You stepped up to the stage and left your mark on the charts, ${name}! Thank you for competing and bringing the absolute highest energy to Rhythm Game Bash 2026.`;
             }
-            // Fallback default word if someone scans the card without a name parameter
-            return "Player"; 
+            // You can easily add more 'else if' blocks here for vendors or guests later!
         }
 
-        // Inject the name into the HTML placeholder safely
-        document.getElementById('name-placeholder').textContent = getParticipantName();
+        // Run the script on page load
+        window.onload = initDynamicPage;
     </script>
 </body>
 </html>
