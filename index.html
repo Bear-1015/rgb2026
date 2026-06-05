@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB 2026 Memorial Token</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #0b0e14;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .card-container {
+            background: linear-gradient(145deg, #131822, #1b2332);
+            border: 2px solid #3b82f6;
+            border-radius: 16px;
+            padding: 40px 30px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #3b82f6;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .visitor-name {
+            color: #ff6b8b; /* Eye-catching accent color for the username */
+            font-weight: 800;
+            display: inline-block;
+            border-bottom: 2px dashed #ff6b8b;
+            padding-bottom: 2px;
+        }
+        p {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .footer-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="logo">RGB 2026</div>
+        
+        <!-- The dynamic heading -->
+        <h1>Thanks for joining, <br><span id="name-placeholder" class="visitor-name">Player</span>!</h1>
+        
+        <p>
+            You made history with us at the MMU Melaka CLC Concourse. This card stands as a permanent digital token of our appreciation for being a core part of Rhythm Game Bash 2026.
+        </p>
+        
+        <div class="footer-note">
+            🎵 Keep smashing those notes and chasing the rhythm. 🎵
+        </div>
+    </div>
+
+    <script>
+        // JavaScript logic to read the URL parameter
+        function getParticipantName() {
+            // Look at the web address (e.g., website.com/?name=Zhehe218)
+            const urlParams = new URLSearchParams(window.location.search);
+            // Get the value inside 'name'
+            let name = urlParams.get('name');
+            
+            // If a name exists in the link, decode it and clean up any weird spaces
+            if (name) {
+                return decodeURIComponent(name).trim();
+            }
+            // Fallback default word if someone scans the card without a name parameter
+            return "Player"; 
+        }
+
+        // Inject the name into the HTML placeholder safely
+        document.getElementById('name-placeholder').textContent = getParticipantName();
+    </script>
+</body>
+</html>
