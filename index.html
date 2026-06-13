@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RGB 2026 Memorial Token</title>
+    <title>RGB 2026 Live Event Hub</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,152 +11,406 @@
             padding: 0;
         }
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #0b0e14;
             color: #ffffff;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            text-align: center;
-            padding: 20px;
+            padding: 15px;
             transition: background 0.5s ease;
         }
+        .hub-container {
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        /* --- DYNAMIC HEADER CARD --- */
         .card-container {
             background: linear-gradient(145deg, #131822, #1b2332);
             border: 2px solid #3b82f6;
             border-radius: 16px;
-            padding: 40px 30px;
-            max-width: 450px;
-            width: 100%;
+            padding: 30px 20px;
+            text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: all 0.5s ease;
+            margin-bottom: 20px;
         }
         .badge-tag {
             display: inline-block;
-            padding: 6px 16px;
+            padding: 6px 14px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        h1 {
-            font-size: 2rem;
             margin-bottom: 15px;
-            font-weight: 700;
-            line-height: 1.3;
         }
-        .visitor-name {
-            font-weight: 800;
-            display: inline-block;
-            padding-bottom: 2px;
+        h1 { font-size: 1.6rem; margin-bottom: 12px; font-weight: 700; line-height: 1.3;}
+        .visitor-name { font-weight: 800; }
+        p.msg { font-size: 0.95rem; color: #94a3b8; line-height: 1.5; }
+
+        /* --- THEME VARIATIONS --- */
+        body.theme-committee { background-color: #0f0507; }
+        .theme-committee .card-container { border-color: #d4af37; background: linear-gradient(145deg, #1c0a0e, #2a0f14); }
+        .theme-committee .badge-tag { background-color: #de2c4d; color: #fff; }
+        .theme-committee .visitor-name { color: #d4af37; }
+
+        body.theme-participant { background-color: #050b14; }
+        .theme-participant .card-container { border-color: #ff6b8b; background: linear-gradient(145deg, #091220, #101f36); }
+        .theme-participant .badge-tag { background-color: #3b82f6; color: #fff; }
+        .theme-participant .visitor-name { color: #ff6b8b; }
+
+        /* --- NAVIGATION TABS --- */
+        .main-nav, .sub-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
         }
-        p {
-            font-size: 1.05rem;
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            background: #161f30;
+            border: 1px solid #23324d;
+            border-radius: 8px;
             color: #94a3b8;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        .footer-note {
+            font-weight: 600;
+            cursor: pointer;
             font-size: 0.85rem;
-            color: #64748b;
-            font-style: italic;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+        }
+        .theme-participant .tab-btn.active { background: #ff6b8b; border-color: #ff6b8b; }
+        .theme-committee .tab-btn.active { background: #d4af37; border-color: #d4af37; color: #000; }
+
+        /* Secondary internal filters */
+        .sub-nav .tab-btn {
+            padding: 8px;
+            font-size: 0.8rem;
+            background: #0f1624;
         }
 
-        /* --- THEME CUSTOMIZATIONS --- */
+        /* --- FIX: Strict Hide/Show CSS Rules for Sub-Menus --- */
+        .tab-content, .sub-day-content, .sub-game-content {
+            background: #131822;
+            border-radius: 12px;
+            padding: 20px;
+            display: none; /* Hide everything by default */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
         
-        /* Committee Style (Crimson & Gold) */
-        body.theme-committee {
-            background-color: #0f0507;
-        }
-        .theme-committee .card-container {
-            border-color: #d4af37; /* Gold Border */
-            background: linear-gradient(145deg, #1c0a0e, #2a0f14);
-        }
-        .theme-committee .badge-tag {
-            background-color: #de2c4d;
-            color: #ffffff;
-        }
-        .theme-committee .visitor-name {
-            color: #d4af37; /* Gold Name */
-            border-bottom: 2px dashed #d4af37;
+        /* Show content ONLY when it has the active class */
+        .tab-content.active, .sub-day-content.active, .sub-game-content.active { 
+            display: block !important; 
         }
 
-        /* Participant Style (Vibrant Blue & Pink) */
-        body.theme-participant {
-            background-color: #050b14;
+        /* --- SCHEDULE LAYOUTS --- */
+        h2.stage-title {
+            font-size: 1.1rem;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 15px 0 8px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #23324d;
         }
-        .theme-participant .card-container {
-            border-color: #ff6b8b; /* Pink Border */
-            background: linear-gradient(145deg, #091220, #101f36);
+        .theme-participant h2.stage-title { color: #ff6b8b; }
+        .theme-committee h2.stage-title { color: #d4af37; }
+
+        .sched-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
         }
-        .theme-participant .badge-tag {
-            background-color: #3b82f6;
-            color: #ffffff;
+        .sched-table th {
+            text-align: left;
+            background: #1a2333;
+            padding: 8px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-transform: uppercase;
         }
-        .theme-participant .visitor-name {
-            color: #ff6b8b; /* Pink Name */
-            border-bottom: 2px dashed #ff6b8b;
+        .sched-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #1e293b;
+            font-size: 0.85rem;
+            vertical-align: top;
         }
+        .time-col { font-weight: 700; color: #3b82f6; white-space: nowrap; width: 25%; }
+        .theme-participant .time-col { color: #ff6b8b; }
+        .theme-committee .time-col { color: #d4af37; }
+        .desc-text { font-size: 0.75rem; color: #64748b; margin-top: 3px; }
+
+        /* --- PLAYER LIST & BRACKETS --- */
+        .player-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .player-card {
+            background: #1a2333;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border-left: 3px solid #3b82f6;
+        }
+        .theme-participant .player-card { border-left-color: #ff6b8b; }
+        .theme-committee .player-card { border-left-color: #d4af37; }
+        
+        .swiss-box {
+            background: #0f1624;
+            border: 1px dashed #23324d;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+        }
+        .swiss-header { font-size: 0.85rem; font-weight: bold; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; text-align: center; }
+        .swiss-match {
+            display: flex;
+            justify-content: space-between;
+            background: #161f30;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+        .swiss-vs { color: #ff6b8b; font-weight: bold; }
+
+        /* --- BOOTHS LIST --- */
+        .booth-item {
+            display: flex;
+            align-items: center;
+            background: #1a2333;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .booth-num {
+            background: #3b82f6;
+            color: white;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .theme-participant .booth-num { background: #ff6b8b; }
+        .theme-committee .booth-num { background: #d4af37; color: #000; }
+        .booth-tag { font-size: 0.75rem; color: #64748b; margin-left: auto; font-style: italic; }
     </style>
 </head>
 <body>
 
-    <div class="card-container">
-        <!-- Role Badge Tag -->
-        <div id="role-badge" class="badge-tag">MEMORABILIA</div>
-        
-        <!-- Dynamic Heading -->
-        <h1>Thanks for joining, <br><span id="name-placeholder" class="visitor-name">Player</span>!</h1>
-        
-        <!-- Dynamic Message Body -->
-        <p id="message-placeholder">
-            You made history with us at the MMU Melaka CLC Concourse. This card stands as a permanent digital token of our appreciation for being a core part of Rhythm Game Bash 2026.
-        </p>
-        
-        <div class="footer-note">
-            🎵 Keep smashing those notes and chasing the rhythm. 🎵
+    <div class="hub-container">
+        <!-- HEADER MODULE -->
+        <div class="card-container">
+            <div id="role-badge" class="badge-tag">EVENT HUB</div>
+            <h1><span id="header-greeting">Welcome to RGB 2026,</span> <br><span id="name-placeholder" class="visitor-name">Player</span>!</h1>
+            <p class="msg" id="message-placeholder">We are glad to have you with us here at MMU Melaka. Tap the sections below to navigate your schedules and view tournament progress live!</p>
         </div>
-        <a href="./schedule.html" class="btn">Schedule</a>        
+
+        <!-- MAIN NAVIGATION TABS -->
+        <div class="main-nav">
+            <button class="tab-btn active" onclick="switchMainTab('sched-hub')">🗓️ Timelines</button>
+            <button class="tab-btn" onclick="switchMainTab('players-hub')">🎹 Competitors</button>
+            <button class="tab-btn" onclick="switchMainTab('booths-hub')">🎪 Hall Maps</button>
+        </div>
+
+        <!-- ==================== TIMELINES HUB ==================== -->
+        <div id="sched-hub" class="tab-content active">
+            <!-- Day Filters -->
+            <div class="sub-nav">
+                <button class="tab-btn sub-day-btn active" onclick="switchDay('day1-content')">Day 1 (4 July)</button>
+                <button class="tab-btn sub-day-btn" onclick="switchDay('day2-content')">Day 2 (5 July)</button>
+            </div>
+
+            <!-- DAY 1 TIMELINES -->
+            <div id="day1-content" class="sub-day-content active">
+                <h2 class="stage-title">🏆 Main Tournament Stage</h2>
+                <table class="sched-table">
+                    <tr><td class="time-col">10:00 AM – 11:00 AM</td><td>Opening & Player Check-in<div class="desc-text">Registration & verification check.</div></td></tr>
+                    <tr><td class="time-col">11:00 AM – 12:30 PM</td><td>osu!mania Quarterfinals<div class="desc-text">Seeding tier progression flights.</div></td></tr>
+                    <tr><td class="time-col">12:30 PM – 2:30 PM</td><td>🍱 Lunch Break<div class="desc-text">Freeplay area remains open for attendees.</div></td></tr>
+                    <tr><td class="time-col">2:30 PM – 4:00 PM</td><td>osu!mania Quarterfinals<div class="desc-text">Concluding the morning quarterfinal runs.</div></td></tr>
+                    <tr><td class="time-col">4:00 PM – 4:30 PM</td><td>⏸️ Stage on break<div class="desc-text">Ground Floor booths are still open.</div></td></tr>
+                    <tr><td class="time-col">4:30 PM – 6:30 PM</td><td>Tournament Bracket: Arcaea<div class="desc-text">Full bracket mobile elimination paths.</div></td></tr>
+                    <tr><td class="time-col">6:30 PM – 7:00 PM</td><td>⏸️ Stage on break<div class="desc-text">Ground Floor booths are still open.</div></td></tr>
+                    <tr><td class="time-col">7:00 PM – Onwards</td><td>Day 1 Closing<div class="desc-text">Clean up operations.</div></td></tr>
+                </table>
+
+                <h2 class="stage-title">🎤 ACG Event Stage</h2>
+                <table class="sched-table">
+                    <tr><td class="time-col">11:00 AM – 12:00 PM</td><td>Stage Events<div class="desc-text">Community interactive activities & open mic tracks.</div></td></tr>
+                    <tr><td class="time-col">2:00 PM – 5:00 PM</td><td>Stage Events<div class="desc-text">Trivia segments and game challenges.</div></td></tr>
+                </table>
+            </div>
+
+            <!-- DAY 2 TIMELINES -->
+            <div id="day2-content" class="sub-day-content">
+                <h2 class="stage-title">🏆 Main Tournament Stage</h2>
+                <table class="sched-table">
+                    <tr><td class="time-col">10:30 AM – 12:30 PM</td><td>Tournament Bracket: PJSK<div class="desc-text">Final competitive segments.</div></td></tr>
+                    <tr><td class="time-col">12:30 PM – 2:00 PM</td><td>🍱 Lunch Break<div class="desc-text">Midday intermission window.</div></td></tr>
+                    <tr><td class="time-col">2:00 PM – 3:00 PM</td><td>⏸️ Stage on break<div class="desc-text">Ground Floor booths are still open.</div></td></tr>
+                    <tr><td class="time-col">3:00 PM – 7:00 PM</td><td>Tournament Bracket: osu!mania + Prize Giving<div class="desc-text">Championship tier bracket and podium layout.</div></td></tr>
+                    <tr><td class="time-col">7:00 PM – 7:30 PM</td><td>⏸️ Stage on break<div class="desc-text">Ground Floor booths are still open.</div></td></tr>
+                    <tr><td class="time-col">7:30 PM – 9:30 PM</td><td>🎧 DJ Night<div class="desc-text">High-BPM J-Core sets and remixes.</div></td></tr>
+                    <tr><td class="time-col">9:30 PM – 11:00 PM</td><td>Closing & Pack-up<div class="desc-text">Official conclusion of the festival.</div></td></tr>
+                </table>
+
+                <h2 class="stage-title">🎤 ACG Event Stage</h2>
+                <table class="sched-table">
+                    <tr><td class="time-col">11:00 AM – 12:00 PM</td><td>Stage Events<div class="desc-text">Community interactive activities & open mic tracks.</div></td></tr>
+                    <tr><td class="time-col">2:00 PM – 5:00 PM</td><td>Stage Events<div class="desc-text">Trivia segments and game challenges.</div></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==================== COMPETITORS HUB ==================== -->
+        <div id="players-hub" class="tab-content">
+            <!-- Game Category Filters -->
+            <div class="sub-nav">
+                <button class="tab-btn sub-game-btn active" onclick="switchGame('mania-players')">osu!mania 4k</button>
+                <button class="tab-btn sub-game-btn" onclick="switchGame('pjsk-players')">PJSK</button>
+                <button class="tab-btn sub-game-btn" onclick="switchGame('arcaea-players')">Arcaea</button>
+            </div>
+
+            <!-- OSU!MANIA SEED LIST -->
+            <div id="mania-players" class="sub-game-content active">
+                <div class="player-grid">
+                    <div class="player-card">Leon</div><div class="player-card">BenzilZK</div>
+                    <div class="player-card">Blethz</div><div class="player-card">sleppy</div>
+                    <div class="player-card">Iroha Natsume</div><div class="player-card">Aepq</div>
+                    <div class="player-card">Lau</div><div class="player-card">Sol</div>
+                    <div class="player-card">Gee</div><div class="player-card">Kzon</div>
+                    <div class="player-card">JayLye</div><div class="player-card">Gaslight</div>
+                    <div class="player-card">NyuPenyu</div><div class="player-card">Ayman</div>
+                    <div class="player-card">Nickey</div>
+                    <!--  -->
+
+
+                </div>       
+            </div>
+
+            <!-- PJSK SEED LIST -->
+            <div id="pjsk-players" class="sub-game-content">
+                <div class="player-grid">
+                    <div class="player-card">NickkyOnce</div><div class="player-card">chaobao</div>
+                    <div class="player-card">BenzilZK</div><div class="player-card">Lee188155</div>
+                    <div class="player-card">Justin Chuen</div><div class="player-card">Gee</div>
+                    <div class="player-card">Gaslight</div>
+                </div>
+                    <!--
+                
+                
+                
+                    -->
+            </div>
+
+            <!-- ARCAEA SEED LIST -->
+            <div id="arcaea-players" class="sub-game-content">
+                <div class="player-grid">
+                    <div class="player-card">Leon</div><div class="player-card">Justin Chuen</div>
+                    <div class="player-card">Shen</div><div class="player-card">Gee</div>
+                    <div class="player-card">Arco</div>
+                </div>
+                    <!-- 
+                
+                
+                    -->
+            </div>
+        </div>
+
+        <!-- ==================== BOOTHS ALLY HUB ==================== -->
+        <div id="booths-hub" class="tab-content">
+            <div class="booth-item"><div class="booth-num">1</div><span><strong>HanDevice</strong></span><span class="booth-tag">Community Hardware</span></div>
+            <div class="booth-item"><div class="booth-num">2</div><span><strong>Mochi Station</strong></span><span class="booth-tag">Artist Alley</span></div>
+            <div class="booth-item"><div class="booth-num">3</div><span><strong>Zen Sann</strong></span><span class="booth-tag">Artist Alley</span></div>
+            <div class="booth-item"><div class="booth-num">4</div><span><strong>Egames Club</strong></span><span class="booth-tag">Gaming Exhibition</span></div>
+        </div>
     </div>
 
+    <!-- JAVASCRIPT ACTIONS -->
     <script>
-        function initDynamicPage() {
-            const urlParams = new URLSearchParams(window.location.search);
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.main-nav .tab-btn').forEach(el => el.classList.remove('active'));
             
-            // 1. Parse Name
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function switchDay(dayId) {
+            document.querySelectorAll('.sub-day-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.sub-day-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(dayId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function switchGame(gameId) {
+            document.querySelectorAll('.sub-game-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.sub-game-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(gameId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // CONTROL VAR: Change this to true to instantly flip the site into Post-Event Memorial Mode
+        const IS_EVENT_FINISHED = false; 
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
             let name = urlParams.get('name');
             name = name ? decodeURIComponent(name).trim() : "Player";
             document.getElementById('name-placeholder').textContent = name;
             
-            // 2. Parse Role and Apply Dynamic Themes/Content
             let role = urlParams.get('role');
             role = role ? role.toLowerCase().trim() : "default";
             
             const bodyEl = document.body;
             const badgeEl = document.getElementById('role-badge');
+            const greetEl = document.getElementById('header-greeting');
             const messageEl = document.getElementById('message-placeholder');
             
             if (role === 'committee' || role === 'comm') {
-                // Apply Committee Styles
                 bodyEl.classList.add('theme-committee');
                 badgeEl.textContent = "🛡️ Committee Staff";
-                messageEl.textContent = `Thank you for your incredible dedication and hard work behind the scenes, ${name}! Your efforts made RGB 2026 a reality at the CLC Concourse. This token honors your contribution to the crew.`;
-            } 
-            else if (role === 'participant' || role === 'player') {
-                // Apply Participant Styles
+            } else if (role === 'participant' || role === 'player') {
                 bodyEl.classList.add('theme-participant');
-                badgeEl.textContent = "🎹 Tourney Competitor";
-                messageEl.textContent = `You stepped up to the stage and left your mark on the charts, ${name}! Thank you for competing and bringing the absolute highest energy to Rhythm Game Bash 2026.`;
+                badgeEl.textContent = "🎹 Competitor";
             }
-            // You can easily add more 'else if' blocks here for vendors or guests later!
-        }
 
-        // Run the script on page load
-        window.onload = initDynamicPage;
+            if (IS_EVENT_FINISHED) {
+                greetEl.textContent = "Thanks for joining,";
+                badgeEl.textContent = "MEMORABILIA";
+                if (role === 'committee' || role === 'comm') {
+                    messageEl.textContent = `Thank you for working behind the scenes to lock in RGB 2026 at the CLC Concourse! Your contribution built this festival track. See you next game!`;
+                } else {
+                    messageEl.textContent = `You left your mark on the charts and made community history at MMU Melaka. This card stands as your token of participation! Keep chasing the rhythm.`;
+                }
+            } else {
+                greetEl.textContent = "Welcome to RGB 2026,";
+                if (role === 'committee' || role === 'comm') {
+                    messageEl.textContent = `Staff access active. Track active timelines, field registrations, and manage floor configurations below. Let's make this weekend legendary!`;
+                } else if (role === 'participant' || role === 'player') {
+                    messageEl.textContent = `Your entry registration has cleared! Prepare your setups, monitor the real-time brackets below, and track your upcoming block times smoothly.`;
+                }
+            }
+        }
     </script>
 </body>
 </html>
