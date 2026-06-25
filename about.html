@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhythm Game Bash - About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --light-blue: #e0f2fe;
+            --pink: #f472b6;
+            --white: #ffffff;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+        }
+
+        body {
+            background-color: #bae6fd; 
+            background-image: linear-gradient(135deg, #bae6fd 0%, #e0e7ff 50%, #fbcfe8 100%);
+            background-attachment: fixed; 
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+        }
+
+        .navbar { background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.1); position: sticky; top: 0; z-index: 1000; }
+        .nav-logo-link { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo { height: 50px; width: auto; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--primary-blue); font-weight: 700; font-size: 16px; padding: 8px 16px; border-radius: 20px; transition: all 0.2s ease; }
+        .nav-links a:hover { background-color: var(--light-blue); color: var(--accent-blue); }
+        .nav-links a.active { background-color: var(--pink); color: var(--white); }
+
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15);
+            padding: 40px;
+            border: 3px solid var(--white);
+            text-align: center;
+        }
+
+        .section-title { color: var(--primary-blue); font-size: 28px; font-weight: 900; margin: 0 0 20px 0; padding-bottom: 15px; border-bottom: 3px dashed var(--light-blue); text-transform: uppercase; }
+        .about-text { font-size: 16px; line-height: 1.8; color: var(--text-dark); margin-bottom: 20px; }
+
+        .footer { background-color: var(--white); padding: 30px 20px; text-align: center; border-top: 3px solid var(--light-blue); }
+        .footer h3 { color: var(--primary-blue); margin: 0 0 20px 0; font-weight: 800; }
+        .social-links { display: flex; justify-content: center; gap: 15px; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; color: var(--white); font-size: 16px; transition: transform 0.2s ease; }
+        .social-btn i { font-size: 20px; }
+        .social-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .btn-discord { background-color: #5865F2; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .btn-youtube { background-color: #FF0000; }
+
+        @media (max-width: 600px) { .navbar { flex-direction: column; gap: 15px; padding: 15px; } .social-links { flex-wrap: wrap; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo-link"><img src="logo.png" alt="RGB Logo" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="tournament.html">Tournament Dashboard</a>
+			<a href="mascots.html">Mascots</a>			
+            <a href="about.html" class="active">About Us</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <h2 class="section-title">✨ About RGB 2026</h2>
+            
+            <p class="about-text">
+                Rhythm Game Bash (RGB) is the ultimate festival celebrating rhythm games, community, and competition! Whether you are a casual player looking to enjoy the artist alley and interactive booths, or a hardcore competitor aiming for the podium on the Main Tournament Stage, there is something here for everyone. 
+            </p>
+            
+            <p class="about-text">
+                Join us for two incredible days of high-BPM action, DJ sets, exclusive merch, and the best rhythm game community in the region!
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+            <a href="https://discord.gg/VJxCwWwmW" target="_blank" rel="noopener noreferrer" class="social-btn btn-discord"><i class="fa-brands fa-discord"></i> Discord</a>
+            <a href="https://www.instagram.com/rhythm_game_bash/" target="_blank" rel="noopener noreferrer" class="social-btn btn-instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="https://www.youtube.com/@RGB-k4h" target="_blank" rel="noopener noreferrer" class="social-btn btn-youtube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        </div>
+    </footer>
+
+</body>
+</html>

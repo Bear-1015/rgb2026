@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhythm Game Bash - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --light-blue: #e0f2fe;
+            --pink: #f472b6;
+            --white: #ffffff;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+        }
+
+        body {
+            background-color: #bae6fd; 
+            background-image: linear-gradient(135deg, #bae6fd 0%, #e0e7ff 50%, #fbcfe8 100%);
+            background-attachment: fixed; 
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+        }
+
+        /* Top Navigation Bar */
+        .navbar { background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.1); position: sticky; top: 0; z-index: 1000; }
+        .nav-logo-link { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo { height: 50px; width: auto; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--primary-blue); font-weight: 700; font-size: 16px; padding: 8px 16px; border-radius: 20px; transition: all 0.2s ease; }
+        .nav-links a:hover { background-color: var(--light-blue); color: var(--accent-blue); }
+        .nav-links a.active { background-color: var(--pink); color: var(--white); }
+
+        .main-content { flex-grow: 1; display: flex; justify-content: center; padding: 40px 20px; }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15);
+            padding: 30px;
+            border: 3px solid var(--white); 
+        }
+
+        .header { text-align: center; margin-bottom: 20px; }
+        .logo { max-width: 250px; height: auto; margin-bottom: 15px; }
+
+        .main-nav { display: flex; gap: 10px; margin-bottom: 25px; justify-content: center; background-color: var(--light-blue); padding: 8px; border-radius: 15px; }
+        .main-nav-btn { flex: 1; padding: 12px; font-size: 15px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; background-color: transparent; color: var(--primary-blue); }
+        .main-nav-btn.active { background-color: var(--white); box-shadow: 0 2px 8px rgba(30, 58, 138, 0.15); color: var(--accent-blue); }
+        .main-nav-btn:hover:not(.active) { background-color: rgba(255,255,255,0.5); }
+
+        /* Standard Tabs */
+        .tabs { display: flex; gap: 15px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
+        .tab-btn { flex: 1; min-width: 120px; max-width: 200px; padding: 10px 15px; font-size: 14px; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
+        .tab-btn.active { background-color: var(--primary-blue); color: var(--white); box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3); }
+        .tab-btn.inactive { background-color: var(--light-blue); color: var(--primary-blue); }
+
+        /* New Logo Tabs Styling */
+        .logo-tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 55px; /* Gives the image some breathing room */
+            padding: 5px 15px;
+        }
+        .logo-tab img {
+            max-height: 100%;
+            max-width: 120px;
+            object-fit: contain;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .logo-tab.inactive img {
+            filter: grayscale(60%) opacity(0.6); /* Makes inactive logos look faded */
+        }
+        .logo-tab.active img {
+            filter: grayscale(0%) opacity(1);
+            transform: scale(1.15); /* Slight pop out effect when active */
+        }
+
+        .content-section, .sub-section { display: none; animation: fadeIn 0.4s ease; }
+        .content-section.active, .sub-section.active { display: block; }
+
+        .section-title { color: var(--primary-blue); font-size: 18px; font-weight: 900; margin: 25px 0 15px 0; padding-bottom: 10px; border-bottom: 3px dashed var(--light-blue); text-transform: uppercase; }
+
+        .event { display: flex; padding: 12px 10px; border-radius: 12px; margin-bottom: 8px; transition: background-color 0.2s ease; }
+        .event:hover { background-color: #f8fafc; }
+        .time { color: var(--accent-blue); width: 170px; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+        .details h4 { margin: 0 0 4px 0; color: var(--text-dark); font-size: 15px; }
+        .details p { margin: 0; color: var(--text-gray); font-size: 13px; }
+
+        .competitor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .competitor-card { background-color: #f8fafc; border: 2px solid var(--light-blue); border-left: 6px solid var(--pink); padding: 12px 15px; border-radius: 10px; font-weight: 700; color: var(--primary-blue); font-size: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: transform 0.2s ease, border-left-color 0.2s ease; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-left-color: var(--accent-blue); }
+
+        .booth-list { display: flex; flex-direction: column; gap: 12px; }
+        .booth-card { background-color: #f8fafc; border: 2px solid var(--light-blue); padding: 15px; border-radius: 12px; display: flex; align-items: center; transition: transform 0.2s ease; }
+        .booth-card:hover { transform: translateX(5px); border-color: var(--accent-blue); }
+        .booth-number { background-color: var(--pink); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; box-shadow: 0 2px 5px rgba(244, 114, 182, 0.4); }
+        .booth-name { font-weight: 700; color: var(--primary-blue); font-size: 16px; flex-grow: 1; }
+        .booth-category { color: var(--text-gray); font-size: 14px; font-style: italic; }
+
+        /* Footer */
+        .footer { background-color: var(--white); padding: 30px 20px; text-align: center; border-top: 3px solid var(--light-blue); }
+        .footer h3 { color: var(--primary-blue); margin: 0 0 20px 0; font-weight: 800; }
+        .social-links { display: flex; justify-content: center; gap: 15px; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; color: var(--white); font-size: 16px; transition: transform 0.2s ease; }
+        .social-btn i { font-size: 20px; }
+        .social-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .btn-discord { background-color: #5865F2; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .btn-youtube { background-color: #FF0000; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; gap: 15px; padding: 15px; }
+            .event { flex-direction: column; } .time { width: 100%; margin-bottom: 5px; }
+            .competitor-grid { grid-template-columns: 1fr; }
+            .main-nav { flex-direction: column; }
+            .social-links { flex-wrap: wrap; }
+            .logo-tab img { max-width: 80px; } /* Shrink logos slightly on phones */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo-link"><img src="logo.png" alt="RGB Logo" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="tournament.html" class="active">Tournament Dashboard</a> 
+            <a href="mascots.html">Mascots</a>
+            <a href="about.html">About Us</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <img src="logo.png" alt="Rhythm Game Bash Logo" class="logo">
+            </div>
+
+            <div class="main-nav">
+                <button id="nav-timelines" class="main-nav-btn active" onclick="switchMain('timelines')">📅 Timelines</button>
+                <button id="nav-competitors" class="main-nav-btn" onclick="switchMain('competitors')">🎹 Competitors</button>
+                <button id="nav-maps" class="main-nav-btn" onclick="switchMain('maps')">🗺️ Hall Maps</button>
+            </div>
+
+            <div id="section-timelines" class="content-section active">
+                <div class="tabs">
+                    <button id="btn-day1" class="tab-btn active" onclick="switchSubTab('day1', 'day-tab')">Day 1 (4th July)</button>
+                    <button id="btn-day2" class="tab-btn inactive" onclick="switchSubTab('day2', 'day-tab')">Day 2 (5th July)</button>
+                </div>
+
+                <div id="day1" class="sub-section day-tab active">
+                    <div class="section-title">🏆 MAIN TOURNAMENT STAGE</div>
+                    <div class="event"><div class="time">10:00 AM – 11:00 AM</div><div class="details"><h4>Opening & Player Check-in</h4><p>Registration & verification check.</p></div></div>
+                    <div class="event"><div class="time">11:00 AM – 12:30 PM</div><div class="details"><h4>osu!mania Quarterfinals</h4><p>Seeding tier progression flights.</p></div></div>
+                    <div class="event"><div class="time">12:30 PM – 2:30 PM</div><div class="details"><h4>🍱 Lunch Break</h4><p>Freeplay area remains open for attendees.</p></div></div>
+                    <div class="event"><div class="time">2:30 PM – 4:00 PM</div><div class="details"><h4>osu!mania Quarterfinals</h4><p>Concluding the morning quarterfinal runs.</p></div></div>
+                    <div class="event"><div class="time">4:00 PM – 4:30 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+                    <div class="event"><div class="time">4:30 PM – 6:30 PM</div><div class="details"><h4>Tournament Bracket: Arcaea</h4><p>Full bracket mobile elimination paths.</p></div></div>
+                    <div class="event"><div class="time">6:30 PM – 7:00 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+                    <div class="event"><div class="time">7:00 PM – Onwards</div><div class="details"><h4>Day 1 Closing</h4><p>Clean up operations.</p></div></div>
+
+                    <div class="section-title">🎤 ACG EVENT STAGE</div>
+                    <div class="event"><div class="time">11:00 AM – 12:00 PM</div><div class="details"><h4>Stage Events</h4><p>Community interactive activities & open mic tracks.</p></div></div>
+                    <div class="event"><div class="time">2:00 PM – 5:00 PM</div><div class="details"><h4>Stage Events</h4><p>Trivia segments and game challenges.</p></div></div>
+                </div>
+
+                <div id="day2" class="sub-section day-tab">
+                    <div class="section-title">🏆 MAIN TOURNAMENT STAGE</div>
+                    <div class="event"><div class="time">10:30 AM – 12:30 PM</div><div class="details"><h4>Tournament Bracket: PJSK</h4><p>Final competitive segments.</p></div></div>
+                    <div class="event"><div class="time">12:30 PM – 2:00 PM</div><div class="details"><h4>🍱 Lunch Break</h4><p>Midday intermission window.</p></div></div>
+                    <div class="event"><div class="time">2:00 PM – 3:00 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+                    <div class="event"><div class="time">3:00 PM – 7:00 PM</div><div class="details"><h4>Tournament Bracket: osu!mania + Prize Giving</h4><p>Championship tier bracket and podium layout.</p></div></div>
+                    <div class="event"><div class="time">7:00 PM – 7:30 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+                    <div class="event"><div class="time">7:30 PM – 9:30 PM</div><div class="details"><h4>🎧 DJ Night</h4><p>High-BPM J-Core sets and remixes.</p></div></div>
+                    <div class="event"><div class="time">9:30 PM – 11:00 PM</div><div class="details"><h4>Closing & Pack-up</h4><p>Official conclusion of the festival.</p></div></div>
+
+                    <div class="section-title">🎤 ACG EVENT STAGE</div>
+                    <div class="event"><div class="time">11:00 AM – 12:00 PM</div><div class="details"><h4>Stage Events</h4><p>Community interactive activities & open mic tracks.</p></div></div>
+                    <div class="event"><div class="time">2:00 PM – 5:00 PM</div><div class="details"><h4>Stage Events</h4><p>Trivia segments and game challenges.</p></div></div>
+                </div>
+            </div>
+
+            <div id="section-competitors" class="content-section">
+                
+                <div class="tabs">
+                    <button id="btn-mania" class="tab-btn logo-tab active" onclick="switchSubTab('game-mania', 'game-tab')">
+                        <img src="osu.png" alt="osu!mania 4k">
+                    </button>
+                    <button id="btn-pjsk" class="tab-btn logo-tab inactive" onclick="switchSubTab('game-pjsk', 'game-tab')">
+                        <img src="pjsk.png" alt="PJSK">
+                    </button>
+                    <button id="btn-arcaea" class="tab-btn logo-tab inactive" onclick="switchSubTab('game-arcaea', 'game-tab')">
+                        <img src="arcaea.png" alt="Arcaea">
+                    </button>
+                </div>
+
+                <div id="game-mania" class="sub-section game-tab active">
+                    <div class="competitor-grid">
+                        <div class="competitor-card">Leon</div><div class="competitor-card">BenzilZK</div><div class="competitor-card">Blethz</div><div class="competitor-card">sleppy</div><div class="competitor-card">Iroha Natsume</div><div class="competitor-card">Aepq</div><div class="competitor-card">Lau</div><div class="competitor-card">Sol</div><div class="competitor-card">Gee</div><div class="competitor-card">Kzon</div><div class="competitor-card">JayLye</div><div class="competitor-card">Gaslight</div><div class="competitor-card">NyuPenyu</div><div class="competitor-card">Ayman</div><div class="competitor-card">Nickey</div>
+                    </div>
+                </div>
+
+                <div id="game-pjsk" class="sub-section game-tab">
+                    <div class="competitor-grid">
+                        <div class="competitor-card">NickkyOnce</div><div class="competitor-card">chaobao</div><div class="competitor-card">BenzilZK</div><div class="competitor-card">Lee188155</div><div class="competitor-card">Justin Chuen</div><div class="competitor-card">Gee</div><div class="competitor-card">Gaslight</div>
+                    </div>
+                </div>
+
+                <div id="game-arcaea" class="sub-section game-tab">
+                    <div class="competitor-grid">
+                        <div class="competitor-card">Leon</div><div class="competitor-card">Justin Chuen</div><div class="competitor-card">Shen</div><div class="competitor-card">Gee</div><div class="competitor-card">Arco</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-maps" class="content-section">
+                <div class="section-title">📍 Exhibitor List</div>
+                <div class="booth-list">
+                    <div class="booth-card"><div class="booth-number">1</div><div class="booth-name">HanDevice</div><div class="booth-category">Community Hardware</div></div>
+                    <div class="booth-card"><div class="booth-number">2</div><div class="booth-name">Mochi Station</div><div class="booth-category">Artist Alley</div></div>
+                    <div class="booth-card"><div class="booth-number">3</div><div class="booth-name">Zen Sann</div><div class="booth-category">Artist Alley</div></div>
+                    <div class="booth-card"><div class="booth-number">4</div><div class="booth-name">Egames Club</div><div class="booth-category">Gaming Exhibition</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+            <a href="https://discord.gg/VJxCwWwmW" target="_blank" rel="noopener noreferrer" class="social-btn btn-discord"><i class="fa-brands fa-discord"></i> Discord</a>
+            <a href="https://www.instagram.com/rhythm_game_bash/" target="_blank" rel="noopener noreferrer" class="social-btn btn-instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="https://www.youtube.com/@RGB-k4h" target="_blank" rel="noopener noreferrer" class="social-btn btn-youtube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        </div>
+    </footer>
+
+    <script>
+        function switchMain(sectionName) {
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.main-nav-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('section-' + sectionName).classList.add('active');
+            document.getElementById('nav-' + sectionName).classList.add('active');
+        }
+
+        function switchSubTab(targetId, tabClass) {
+            document.querySelectorAll('.' + tabClass).forEach(el => el.classList.remove('active'));
+            let activeSection = document.querySelector('.content-section.active');
+            activeSection.querySelectorAll('.tab-btn').forEach(el => { el.classList.remove('active'); el.classList.add('inactive'); });
+            document.getElementById(targetId).classList.add('active');
+            let clickedBtnId = targetId.replace('game-', 'btn-').replace('day1', 'btn-day1').replace('day2', 'btn-day2');
+            let btn = document.getElementById(clickedBtnId);
+            if(btn) { btn.classList.remove('inactive'); btn.classList.add('active'); }
+        }
+    </script>
+</body>
+</html>
