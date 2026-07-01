@@ -1,0 +1,91 @@
+<main class="main-content">
+  <div class="container">
+    <div class="header">
+      <img src="assets/logo.png" alt="Rhythm Game Bash Logo" class="logo" />
+    </div>
+
+    <div class="page-tabs" role="tablist" aria-label="Tournament sections">
+      <button id="nav-timelines" class="section-btn" [class.active]="activeSection() === 'timelines'" (click)="switchMain('timelines')">📅 Timelines</button>
+      <button id="nav-competitors" class="section-btn" [class.active]="activeSection() === 'competitors'" (click)="switchMain('competitors')">🎹 Competitors</button>
+      <button id="nav-maps" class="section-btn" [class.active]="activeSection() === 'maps'" (click)="switchMain('maps')">🗺️ Hall Maps</button>
+    </div>
+
+    <div id="section-timelines" class="content-section timeline-section" [class.active]="activeSection() === 'timelines'">
+      <div class="tabs" role="tablist" aria-label="Day selector">
+        <button id="btn-day1" class="tab-btn" [class.active]="activeDayTab() === 'day1'" [class.inactive]="activeDayTab() !== 'day1'" (click)="switchSubTab('day1')">Day 1 (4th July)</button>
+        <button id="btn-day2" class="tab-btn" [class.active]="activeDayTab() === 'day2'" [class.inactive]="activeDayTab() !== 'day2'" (click)="switchSubTab('day2')">Day 2 (5th July)</button>
+      </div>
+
+      <div id="day1" class="sub-section day-tab" [class.active]="activeDayTab() === 'day1'">
+        <div class="section-title">🏆 MAIN TOURNAMENT STAGE</div>
+      <div class="event"><div class="time">10:00 AM – 11:00 AM</div><div class="details"><h4>Opening & Player Check-in</h4><p>Registration & verification check.</p></div></div>
+      <div class="event"><div class="time">11:00 AM – 12:30 PM</div><div class="details"><h4>osu!mania Quarterfinals</h4><p>Seeding tier progression flights.</p></div></div>
+      <div class="event"><div class="time">12:30 PM – 2:30 PM</div><div class="details"><h4>🍱 Lunch Break</h4><p>Freeplay area remains open for attendees.</p></div></div>
+      <div class="event"><div class="time">2:30 PM – 4:00 PM</div><div class="details"><h4>osu!mania Quarterfinals</h4><p>Concluding the morning quarterfinal runs.</p></div></div>
+      <div class="event"><div class="time">4:00 PM – 4:30 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+      <div class="event"><div class="time">4:30 PM – 6:30 PM</div><div class="details"><h4>Tournament Bracket: Arcaea</h4><p>Full bracket mobile elimination paths.</p></div></div>
+      <div class="event"><div class="time">6:30 PM – 7:00 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+      <div class="event"><div class="time">7:00 PM – Onwards</div><div class="details"><h4>Day 1 Closing</h4><p>Clean up operations.</p></div></div>
+
+      <div class="section-title">🎤 ACG EVENT STAGE</div>
+      <div class="event"><div class="time">11:00 AM – 12:00 PM</div><div class="details"><h4>Stage Events</h4><p>Community interactive activities & open mic tracks.</p></div></div>
+      <div class="event"><div class="time">2:00 PM – 5:00 PM</div><div class="details"><h4>Stage Events</h4><p>Trivia segments and game challenges.</p></div></div>
+    </div>
+
+    <div id="day2" class="sub-section day-tab" [class.active]="activeDayTab() === 'day2'">
+      <div class="section-title">🏆 MAIN TOURNAMENT STAGE</div>
+      <div class="event"><div class="time">10:30 AM – 12:30 PM</div><div class="details"><h4>Tournament Bracket: PJSK</h4><p>Final competitive segments.</p></div></div>
+      <div class="event"><div class="time">12:30 PM – 2:00 PM</div><div class="details"><h4>🍱 Lunch Break</h4><p>Midday intermission window.</p></div></div>
+      <div class="event"><div class="time">2:00 PM – 3:00 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+      <div class="event"><div class="time">3:00 PM – 7:00 PM</div><div class="details"><h4>Tournament Bracket: osu!mania + Prize Giving</h4><p>Championship tier bracket and podium layout.</p></div></div>
+      <div class="event"><div class="time">7:00 PM – 7:30 PM</div><div class="details"><h4>⏸️ Stage on break</h4><p>Ground Floor booths are still open.</p></div></div>
+      <div class="event"><div class="time">7:30 PM – 9:30 PM</div><div class="details"><h4>🎧 DJ Night</h4><p>High-BPM J-Core sets and remixes.</p></div></div>
+      <div class="event"><div class="time">9:30 PM – 11:00 PM</div><div class="details"><h4>Closing & Pack-up</h4><p>Official conclusion of the festival.</p></div></div>
+
+      <div class="section-title">🎤 ACG EVENT STAGE</div>
+      <div class="event"><div class="time">11:00 AM – 12:00 PM</div><div class="details"><h4>Stage Events</h4><p>Community interactive activities & open mic tracks.</p></div></div>
+      <div class="event"><div class="time">2:00 PM – 5:00 PM</div><div class="details"><h4>Stage Events</h4><p>Trivia segments and game challenges.</p></div></div>
+    </div>
+  </div>
+
+  <div id="section-competitors" class="content-section" [class.active]="activeSection() === 'competitors'">
+    <div class="tabs">
+      <button id="btn-mania" class="tab-btn logo-tab" [class.active]="activeGameTab() === 'game-mania'" [class.inactive]="activeGameTab() !== 'game-mania'" (click)="switchSubTab('game-mania')">
+        <img src="assets/osu.png" alt="osu!mania 4k" />
+      </button>
+      <button id="btn-pjsk" class="tab-btn logo-tab" [class.active]="activeGameTab() === 'game-pjsk'" [class.inactive]="activeGameTab() !== 'game-pjsk'" (click)="switchSubTab('game-pjsk')">
+        <img src="assets/pjsk.png" alt="PJSK" />
+      </button>
+      <button id="btn-arcaea" class="tab-btn logo-tab" [class.active]="activeGameTab() === 'game-arcaea'" [class.inactive]="activeGameTab() !== 'game-arcaea'" (click)="switchSubTab('game-arcaea')">
+        <img src="assets/arcaea.png" alt="Arcaea" />
+      </button>
+    </div>
+
+    <div id="game-mania" class="sub-section game-tab" [class.active]="activeGameTab() === 'game-mania'">
+      <div class="competitor-grid">
+        <div class="competitor-card">Leon</div><div class="competitor-card">BenzilZK</div><div class="competitor-card">Blethz</div><div class="competitor-card">sleppy</div><div class="competitor-card">Iroha Natsume</div><div class="competitor-card">Aepq</div><div class="competitor-card">Lau</div><div class="competitor-card">Sol</div><div class="competitor-card">Gee</div><div class="competitor-card">Kzon</div><div class="competitor-card">JayLye</div><div class="competitor-card">Gaslight</div><div class="competitor-card">NyuPenyu</div><div class="competitor-card">Ayman</div><div class="competitor-card">Nickey</div>
+      </div>
+    </div>
+
+    <div id="game-pjsk" class="sub-section game-tab" [class.active]="activeGameTab() === 'game-pjsk'">
+      <div class="competitor-grid">
+        <div class="competitor-card">NickkyOnce</div><div class="competitor-card">chaobao</div><div class="competitor-card">BenzilZK</div><div class="competitor-card">Lee188155</div><div class="competitor-card">Justin Chuen</div><div class="competitor-card">Gee</div><div class="competitor-card">Gaslight</div>
+      </div>
+    </div>
+
+    <div id="game-arcaea" class="sub-section game-tab" [class.active]="activeGameTab() === 'game-arcaea'">
+      <div class="competitor-grid">
+        <div class="competitor-card">Leon</div><div class="competitor-card">Justin Chuen</div><div class="competitor-card">Shen</div><div class="competitor-card">Gee</div><div class="competitor-card">Arco</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="section-maps" class="content-section" [class.active]="activeSection() === 'maps'">
+    <div class="section-title">📍 Exhibitor List</div>
+    <div class="booth-list">
+      <div class="booth-card"><div class="booth-number">1</div><div class="booth-name">HanDevice</div><div class="booth-category">Community Hardware</div></div>
+      <div class="booth-card"><div class="booth-number">2</div><div class="booth-name">Mochi Station</div><div class="booth-category">Artist Alley</div></div>
+      <div class="booth-card"><div class="booth-number">3</div><div class="booth-name">Zen Sann</div><div class="booth-category">Artist Alley</div></div>
+      <div class="booth-card"><div class="booth-number">4</div><div class="booth-name">Egames Club</div><div class="booth-category">Gaming Exhibition</div></div>
+    </div>
+  </div>

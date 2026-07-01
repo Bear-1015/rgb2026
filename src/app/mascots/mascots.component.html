@@ -1,0 +1,56 @@
+<main class="main-content mascots-page">
+  <h1 class="page-title">🌟 Meet Our Mascots 🌟</h1>
+
+  <div class="mascot-row">
+    <div class="mascot-img-container">
+      <img src="assets/Miku.jpg" alt="Miku" class="mascot-img delay-1" (click)="openLightbox('assets/Miku.jpg')" />
+    </div>
+    <div class="mascot-info">
+      <h2 class="mascot-name color-miku">Miku</h2>
+      <div class="mascot-game">
+        <img src="assets/pjsk.png" alt="Project Sekai" />
+      </div>
+      <p class="mascot-desc">
+        Bringing the bright, colorful energy of the virtual stage directly to RGB 2026! Miku is here to cheer on our mobile rhythm gamers.
+        Whether you are tapping through intense beatmaps or enjoying the concert vibes, she will make sure the music never stops!
+      </p>
+    </div>
+  </div>
+
+  <div class="mascot-row reverse">
+    <div class="mascot-img-container">
+      <img src="assets/Tempest.jpg" alt="Tempest" class="mascot-img delay-2" (click)="openLightbox('assets/Tempest.jpg')" />
+    </div>
+    <div class="mascot-info">
+      <h2 class="mascot-name color-tempest">Tempest</h2>
+      <div class="mascot-game">
+        <img src="assets/arcaea.png" alt="Arcaea" />
+      </div>
+      <p class="mascot-desc">
+        Elegant and mysterious, Tempest represents the fierce competition and complex patterns of the Arcaea bracket.
+        She watches over the Main Tournament Stage, challenging players to reach their highest potential.
+      </p>
+    </div>
+  </div>
+
+  <div class="mascot-row">
+    <div class="mascot-img-container">
+      <img src="assets/Pippi.jpg" alt="Pippi" class="mascot-img delay-3" (click)="openLightbox('assets/Pippi.jpg')" />
+    </div>
+    <div class="mascot-info">
+      <h2 class="mascot-name color-pippi">Pippi</h2>
+      <div class="mascot-game">
+        <img src="assets/osu.png" alt="osu!" />
+      </div>
+      <p class="mascot-desc">
+        Click the circles... to the beat! Pippi brings her boundless enthusiasm and iconic pink aesthetic to the festival.
+        As the beloved face of our osu!mania 4k bracket, she is ready to witness insane reading speeds and perfect accuracy.
+      </p>
+    </div>
+  </div>
+
+  <div class="lightbox" [class.show]="lightboxOpen()" (click)="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img [src]="lightboxSrc()" alt="Mascot preview" class="lightbox-content" />
+  </div>
+</main>
