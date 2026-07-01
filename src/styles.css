@@ -1,0 +1,53 @@
+:root {
+  --primary-blue: #1e3a8a;
+  --accent-blue: #3b82f6;
+  --light-blue: #e0f2fe;
+  --pink: #f472b6;
+  --white: #ffffff;
+  --text-dark: #1e293b;
+  --text-gray: #64748b;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #bae6fd;
+  background-image: linear-gradient(135deg, #bae6fd 0%, #e0e7ff 50%, #fbcfe8 100%);
+  background-attachment: fixed;
+  color: var(--text-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button,
+.cta-button,
+.section-btn,
+.tab-btn,
+.logo-tab,
+.menu-btn,
+.nav-close,
+.social-btn,
+.nav-dropdown a {
+  cursor: pointer;
+}
+
+button:focus-visible,
+.cta-button:focus-visible,
+.section-btn:focus-visible,
+.tab-btn:focus-visible,
+.menu-btn:focus-visible,
+.nav-close:focus-visible,
+.social-btn:focus-visible,
+.nav-dropdown a:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 3px;
+}

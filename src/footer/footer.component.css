@@ -1,0 +1,66 @@
+.footer {
+  background-color: var(--white);
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 3px solid var(--light-blue);
+}
+
+.footer h3 {
+  color: var(--primary-blue);
+  margin: 0 0 20px 0;
+  font-weight: 800;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--white);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, filter 0.2s ease, background-color 0.2s ease;
+}
+
+.social-btn i {
+  font-size: 20px;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  opacity: 0.98;
+  filter: brightness(1.05);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
+}
+
+.btn-discord { background-color: #5865F2; }
+.btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.btn-youtube { background-color: #FF0000; }
+
+@media (max-width: 700px) {
+  .footer {
+    padding: 24px 16px;
+  }
+
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .social-btn {
+    justify-content: center;
+    width: 80%
+  }
+}

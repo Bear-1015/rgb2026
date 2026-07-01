@@ -1,0 +1,43 @@
+<main class="main-content">
+  <section class="hero-section">
+    <div class="hero-logo-wrapper">
+        <img src="assets/logo.png" alt="Rhythm Game Bash" class="hero-logo" />
+    </div>
+
+    <div class="container">
+    <div class="welcome-text">
+      <h2>Welcome to the Ultimate Festival!</h2>
+      <p>
+        Get ready for two days of non-stop beats, high-stakes tournaments, and an amazing community.
+        Whether you are here to compete, shop at the artist alley, or just enjoy the vibe, RGB 2026 is the place to be.
+      </p>
+    </div>
+
+    <div class="event-details">
+      <div>
+        <span class="detail-icon">🗓️</span>
+        <span class="event-text">4 - 5 July 2026</span>
+      </div>
+      <div>
+        <span class="detail-icon">📍</span>
+        <span class="event-text">MMU, Melaka</span>
+      </div>
+    </div>
+
+    <div class="venue-picture-box">
+      <img
+        src="assets/venue.jpg"
+        alt="MMU Melaka Venue"
+        class="venue-img"
+        (error)="onVenueImageError()"
+        [hidden]="venueImageFailed()"
+      />
+      <p class="placeholder-text" [hidden]="!venueImageFailed()">
+        Put your <b>venue.jpg</b> file in the same folder to see it here!
+      </p>
+    </div>
+
+    <a routerLink="/tournament" class="cta-button">View Schedule & Competitors ➡️</a>
+  </div>
+  </section>
+</main>

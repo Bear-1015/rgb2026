@@ -1,0 +1,93 @@
+[debug] [2026-07-01T14:47:59.844Z] ----------------------------------------------------------------------
+[debug] [2026-07-01T14:47:59.846Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\ohst1\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --debug
+[debug] [2026-07-01T14:47:59.846Z] CLI Version:   15.9.0
+[debug] [2026-07-01T14:47:59.846Z] Platform:      win32
+[debug] [2026-07-01T14:47:59.846Z] Node Version:  v24.14.0
+[debug] [2026-07-01T14:47:59.846Z] Time:          Wed Jul 01 2026 23:47:59 GMT+0900 (Japan Standard Time)
+[debug] [2026-07-01T14:47:59.847Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-07-01T14:48:01.222Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-01T14:48:01.223Z] > authorizing via signed-in user (ohst33@gmail.com)
+[debug] [2026-07-01T14:48:01.223Z] [iam] checking project rhythm-game-bash-2026 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-07-01T14:48:01.224Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:01.224Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:01.225Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rhythm-game-bash-2026:testIamPermissions [none]
+[debug] [2026-07-01T14:48:01.225Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/rhythm-game-bash-2026:testIamPermissions  x-goog-user-project=rhythm-game-bash-2026
+[debug] [2026-07-01T14:48:01.225Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rhythm-game-bash-2026:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-07-01T14:48:02.151Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/rhythm-game-bash-2026:testIamPermissions 200
+[debug] [2026-07-01T14:48:02.151Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rhythm-game-bash-2026:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-07-01T14:48:02.152Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:02.152Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:02.152Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/rhythm-game-bash-2026 [none]
+[debug] [2026-07-01T14:48:03.056Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/rhythm-game-bash-2026 200
+[debug] [2026-07-01T14:48:03.056Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/rhythm-game-bash-2026 {"projectId":"rhythm-game-bash-2026","projectNumber":"1077087201819","displayName":"rhythm-game-bash-2026","name":"projects/rhythm-game-bash-2026","resources":{"hostingSite":"rhythm-game-bash-2026"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_da11a845-eafc-4d11-bc78-3b92be7d726b"}
+[info] 
+[info] === Deploying to 'rhythm-game-bash-2026'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2026-07-01T14:48:03.062Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:03.062Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:03.062Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions [none]
+[debug] [2026-07-01T14:48:03.063Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2026-07-01T14:48:05.164Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions 200
+[debug] [2026-07-01T14:48:05.164Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions {"name":"projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[rhythm-game-bash-2026]: beginning deploy... 
+[info] i  hosting[rhythm-game-bash-2026]: found 12 files in dist/rgb-project/browser 
+[debug] [2026-07-01T14:48:05.173Z] [hosting] uploading with 200 concurrency
+[debug] [2026-07-01T14:48:05.174Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:05.174Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:05.175Z] [hosting] hash cache [ZGlzdFxyZ2ItcHJvamVjdFxicm93c2Vy] stored for 12 files
+[debug] [2026-07-01T14:48:05.175Z] [hosting][hash queue][FINAL] {"max":0,"min":0,"avg":0,"active":0,"complete":12,"success":12,"errored":0,"retried":0,"total":12,"elapsed":1}
+[debug] [2026-07-01T14:48:05.175Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c:populateFiles [none]
+[debug] [2026-07-01T14:48:05.176Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c:populateFiles {"files":{"/styles-WRJKSWVG.css":"b74fbde01bf4fade8e103e4d3a78df1263a17ff84c9cb5f104ac1e932b4c871a","/main-EL7CRJCK.js":"2c861c375a29b8f077bfd28e736d4f0df857f95dbb0f411c72d2a830fe42d05c","/index.html":"e26072805aed27d1d973c98a6effc946b755352efa021ea6a638d4a639ad38e0","/favicon.ico":"a905b13e228420df3dbe746dfb656d37a49736494c0737d00e007c8dc7319912","/assets/venue.jpg":"8dfbc9e912839c17afd4e82bb5ee587c73d482363cddcbd8ba68960f84c64235","/assets/Tempest.jpg":"6f46c66d36053929afa29b733a23b80fc5da1e48d312d93baceefa71452c454b","/assets/pjsk.png":"0eb57d1ac97dda19e801be6c81389dd8df92baac061adec726c9f020aa07705e","/assets/Pippi.jpg":"59c1b5a3e31708c71710b24553f39f05b60fae7bc98c32460c1be03484d7cf8a","/assets/osu.png":"c8360b4f9939d3ffc8a59d630b5b18db35b906b18c6f4de0712d26a12bddd4c1","/assets/Miku.jpg":"9d1f395106cbd0f5a2fc8d761150e686e0a5f9cb9a40ca2340c00acb54b387f7","/assets/logo.png":"0ee177493fe55e47ff6796038e59b04d0ddfb6e14af3a1b59e52482ff64b684d","/assets/arcaea.png":"a5379dda05607648f13e7127657a1028b1b1744b8762026a149e594eef724dde"}}
+[debug] [2026-07-01T14:48:06.128Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c:populateFiles 200
+[debug] [2026-07-01T14:48:06.129Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c:populateFiles {"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c/files"}
+[debug] [2026-07-01T14:48:06.129Z] [hosting][populate queue][FINAL] {"max":955,"min":955,"avg":955,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":955}
+[debug] [2026-07-01T14:48:06.129Z] [hosting] uploads queued: 0
+[debug] [2026-07-01T14:48:06.129Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1782917286129}
+[info] i  hosting: upload complete 
+[info] +  hosting[rhythm-game-bash-2026]: file upload complete 
+[debug] [2026-07-01T14:48:06.130Z] [hosting] deploy completed after 964ms
+[debug] [2026-07-01T14:48:06.130Z] [
+  {
+    "config": {
+      "public": "dist/rgb-project/browser",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "rhythm-game-bash-2026"
+    },
+    "version": "projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c"
+  }
+]
+[info] i  hosting[rhythm-game-bash-2026]: finalizing version... 
+[debug] [2026-07-01T14:48:06.131Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:06.132Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:06.132Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c updateMask=status%2Cconfig
+[debug] [2026-07-01T14:48:06.132Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2026-07-01T14:48:07.004Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c 200
+[debug] [2026-07-01T14:48:07.004Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c {"name":"projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-07-01T14:48:08.440462Z","createUser":{"email":"ohst33@gmail.com"},"finalizeTime":"2026-07-01T14:48:10.658417Z","finalizeUser":{"email":"ohst33@gmail.com"}}
+[debug] [2026-07-01T14:48:07.004Z] [hosting] finalized version for rhythm-game-bash-2026:[object Object]
+[info] +  hosting[rhythm-game-bash-2026]: version finalized 
+[info] i  hosting[rhythm-game-bash-2026]: releasing new version... 
+[debug] [2026-07-01T14:48:07.005Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:07.005Z] Checked if tokens are valid: true, expires at: 1782920454398
+[debug] [2026-07-01T14:48:07.005Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/channels/live/releases versionName=projects%2F1077087201819%2Fsites%2Frhythm-game-bash-2026%2Fversions%2F56cfb19e8368351c
+[debug] [2026-07-01T14:48:07.005Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/channels/live/releases {}
+[debug] [2026-07-01T14:48:07.975Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/channels/live/releases 200
+[debug] [2026-07-01T14:48:07.975Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/rhythm-game-bash-2026/channels/live/releases {"name":"projects/1077087201819/sites/rhythm-game-bash-2026/channels/live/releases/1782917290937000","version":{"name":"projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-07-01T14:48:08.440462Z","createUser":{"email":"ohst33@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJv3aRD3E5vlhcFzQPfA34Amoe9PtBSXAgzc3zhZR61Jkj3kdY=mo"},"finalizeTime":"2026-07-01T14:48:10.658417Z","finalizeUser":{"email":"ohst33@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJv3aRD3E5vlhcFzQPfA34Amoe9PtBSXAgzc3zhZR61Jkj3kdY=mo"}},"type":"DEPLOY","releaseTime":"2026-07-01T14:48:10.937Z","releaseUser":{"email":"ohst33@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJv3aRD3E5vlhcFzQPfA34Amoe9PtBSXAgzc3zhZR61Jkj3kdY=mo"}}
+[debug] [2026-07-01T14:48:07.975Z] [hosting] release: {"name":"projects/1077087201819/sites/rhythm-game-bash-2026/channels/live/releases/1782917290937000","version":{"name":"projects/1077087201819/sites/rhythm-game-bash-2026/versions/56cfb19e8368351c","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-07-01T14:48:08.440462Z","createUser":{"email":"ohst33@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJv3aRD3E5vlhcFzQPfA34Amoe9PtBSXAgzc3zhZR61Jkj3kdY=mo"},"finalizeTime":"2026-07-01T14:48:10.658417Z","finalizeUser":{"email":"ohst33@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJv3aRD3E5vlhcFzQPfA34Amoe9PtBSXAgzc3zhZR61Jkj3kdY=mo"}},"type":"DEPLOY","releaseTime":"2026-07-01T14:48:10.937Z","releaseUser":{"email":"ohst33@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJv3aRD3E5vlhcFzQPfA34Amoe9PtBSXAgzc3zhZR61Jkj3kdY=mo"}}
+[info] +  hosting[rhythm-game-bash-2026]: release complete 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/rhythm-game-bash-2026/overview
+[info] Hosting URL: https://rhythm-game-bash-2026.web.app
